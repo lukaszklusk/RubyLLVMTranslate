@@ -9,7 +9,6 @@ public class MyRubyListener extends RubyBaseListener {
     @Override
     public void enterAssignment(RubyParser.AssignmentContext ctx) {
         System.out.println("Przypisuje " + ctx.lvalue.getText() + " wartosc " + ctx.rvalue().getText());
-
     }
 
 }
