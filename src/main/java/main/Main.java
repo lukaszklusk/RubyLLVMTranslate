@@ -1,11 +1,12 @@
+package main;
+
+import antlr_output.RubyLexer;
+import antlr_output.RubyParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
