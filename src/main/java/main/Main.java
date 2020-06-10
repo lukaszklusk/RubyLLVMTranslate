@@ -24,6 +24,8 @@ public class Main {
             ParseTreeWalker walker = new ParseTreeWalker();
             MyRubyListener listener = new MyRubyListener();
             walker.walk(listener,tree);
+            LLVM output = listener.output;
+            output.finalize();
         } catch (IOException e) {
             e.printStackTrace();
         }

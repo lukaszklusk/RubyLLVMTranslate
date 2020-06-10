@@ -27,6 +27,7 @@ expression : function_definition
            | return_statement
            | while_statement
            | for_statement
+           | printer
            ;
 
 require_block : REQUIRE literal_t;
@@ -279,6 +280,8 @@ crlf : CRLF
        }
      ;
 
+printer : PRINT rvalue;
+
 fragment ESCAPED_QUOTE : '\\"';
 LITERAL : '"' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '"'
         | '\'' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '\'';
@@ -345,9 +348,12 @@ RIGHT_SBRACKET : ']';
 
 NIL : 'nil';
 
+PRINT : 'print';
+
 SL_COMMENT : ('#' ~('\r' | '\n')* '\n') -> skip;
 ML_COMMENT : ('=begin' .*? '=end\n') -> skip;
 WS : (' '|'\t')+ -> skip;
+RSYM : '\r' -> skip;
 
 INT : [0-9]+;
 FLOAT : [0-9]*'.'[0-9]+;

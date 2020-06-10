@@ -1,4 +1,4 @@
-// Generated from Ruby.g4 by ANTLR 4.7.1
+// Generated from Ruby.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class RubyParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -24,7 +24,7 @@ public class RubyParser extends Parser {
 		MOD_ASSIGN=37, EXP_ASSIGN=38, BIT_AND=39, BIT_OR=40, BIT_XOR=41, BIT_NOT=42, 
 		BIT_SHL=43, BIT_SHR=44, AND=45, OR=46, NOT=47, LEFT_RBRACKET=48, RIGHT_RBRACKET=49, 
 		LEFT_SBRACKET=50, RIGHT_SBRACKET=51, NIL=52, SL_COMMENT=53, ML_COMMENT=54, 
-		WS=55, INT=56, FLOAT=57, ID=58, ID_GLOBAL=59, ID_FUNCTION=60;
+		WS=55, RSYM=56, INT=57, FLOAT=58, ID=59, ID_GLOBAL=60, ID_FUNCTION=61;
 	public static final int
 		RULE_prog = 0, RULE_expression_list = 1, RULE_expression = 2, RULE_require_block = 3, 
 		RULE_function_definition = 4, RULE_function_definition_body = 5, RULE_function_definition_header = 6, 
@@ -39,38 +39,48 @@ public class RubyParser extends Parser {
 		RULE_float_t = 32, RULE_int_t = 33, RULE_bool_t = 34, RULE_nil_t = 35, 
 		RULE_id = 36, RULE_id_global = 37, RULE_id_function = 38, RULE_terminator = 39, 
 		RULE_crlf = 40;
-	public static final String[] ruleNames = {
-		"prog", "expression_list", "expression", "require_block", "function_definition", 
-		"function_definition_body", "function_definition_header", "function_name", 
-		"function_definition_params", "function_definition_params_list", "return_statement", 
-		"function_call", "function_call_param_list", "function_call_params", "if_elsif_statement", 
-		"if_statement", "unless_statement", "while_statement", "while_expression_list", 
-		"for_statement", "for_expression_list", "assignment", "array_assignment", 
-		"array_definition", "array_definition_elements", "array_selector", "int_result", 
-		"float_result", "string_result", "lvalue", "rvalue", "literal_t", "float_t", 
-		"int_t", "bool_t", "nil_t", "id", "id_global", "id_function", "terminator", 
-		"crlf"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"prog", "expression_list", "expression", "require_block", "function_definition", 
+			"function_definition_body", "function_definition_header", "function_name", 
+			"function_definition_params", "function_definition_params_list", "return_statement", 
+			"function_call", "function_call_param_list", "function_call_params", 
+			"if_elsif_statement", "if_statement", "unless_statement", "while_statement", 
+			"while_expression_list", "for_statement", "for_expression_list", "assignment", 
+			"array_assignment", "array_definition", "array_definition_elements", 
+			"array_selector", "int_result", "float_result", "string_result", "lvalue", 
+			"rvalue", "literal_t", "float_t", "int_t", "bool_t", "nil_t", "id", "id_global", 
+			"id_function", "terminator", "crlf"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, null, "','", "';'", "'\n'", "'require'", "'end'", "'def'", "'return'", 
-		"'if'", "'then'", "'else'", "'elsif'", "'unless'", "'while'", "'retry'", 
-		"'break'", "'for'", "'true'", "'false'", "'+'", "'-'", "'*'", "'/'", "'%'", 
-		"'**'", "'=='", "'!='", "'>'", "'<'", "'<='", "'>='", "'='", "'+='", "'-='", 
-		"'*='", "'/='", "'%='", "'**='", "'&'", "'|'", "'^'", "'~'", "'<<'", "'>>'", 
-		null, null, null, "'('", "')'", "'['", "']'", "'nil'"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, "LITERAL", "COMMA", "SEMICOLON", "CRLF", "REQUIRE", "END", "DEF", 
-		"RETURN", "IF", "THEN", "ELSE", "ELSIF", "UNLESS", "WHILE", "RETRY", "BREAK", 
-		"FOR", "TRUE", "FALSE", "PLUS", "MINUS", "MUL", "DIV", "MOD", "EXP", "EQUAL", 
-		"NOT_EQUAL", "GREATER", "LESS", "LESS_EQUAL", "GREATER_EQUAL", "ASSIGN", 
-		"PLUS_ASSIGN", "MINUS_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", "MOD_ASSIGN", 
-		"EXP_ASSIGN", "BIT_AND", "BIT_OR", "BIT_XOR", "BIT_NOT", "BIT_SHL", "BIT_SHR", 
-		"AND", "OR", "NOT", "LEFT_RBRACKET", "RIGHT_RBRACKET", "LEFT_SBRACKET", 
-		"RIGHT_SBRACKET", "NIL", "SL_COMMENT", "ML_COMMENT", "WS", "INT", "FLOAT", 
-		"ID", "ID_GLOBAL", "ID_FUNCTION"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, null, "','", "';'", "'\n'", "'require'", "'end'", "'def'", "'return'", 
+			"'if'", "'then'", "'else'", "'elsif'", "'unless'", "'while'", "'retry'", 
+			"'break'", "'for'", "'true'", "'false'", "'+'", "'-'", "'*'", "'/'", 
+			"'%'", "'**'", "'=='", "'!='", "'>'", "'<'", "'<='", "'>='", "'='", "'+='", 
+			"'-='", "'*='", "'/='", "'%='", "'**='", "'&'", "'|'", "'^'", "'~'", 
+			"'<<'", "'>>'", null, null, null, "'('", "')'", "'['", "']'", "'nil'", 
+			null, null, null, "'\r'"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, "LITERAL", "COMMA", "SEMICOLON", "CRLF", "REQUIRE", "END", "DEF", 
+			"RETURN", "IF", "THEN", "ELSE", "ELSIF", "UNLESS", "WHILE", "RETRY", 
+			"BREAK", "FOR", "TRUE", "FALSE", "PLUS", "MINUS", "MUL", "DIV", "MOD", 
+			"EXP", "EQUAL", "NOT_EQUAL", "GREATER", "LESS", "LESS_EQUAL", "GREATER_EQUAL", 
+			"ASSIGN", "PLUS_ASSIGN", "MINUS_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", 
+			"MOD_ASSIGN", "EXP_ASSIGN", "BIT_AND", "BIT_OR", "BIT_XOR", "BIT_NOT", 
+			"BIT_SHL", "BIT_SHR", "AND", "OR", "NOT", "LEFT_RBRACKET", "RIGHT_RBRACKET", 
+			"LEFT_SBRACKET", "RIGHT_SBRACKET", "NIL", "SL_COMMENT", "ML_COMMENT", 
+			"WS", "RSYM", "INT", "FLOAT", "ID", "ID_GLOBAL", "ID_FUNCTION"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -132,6 +142,7 @@ public class RubyParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
 	public static class ProgContext extends ParserRuleContext {
 		public Expression_listContext expression_list() {
 			return getRuleContext(Expression_listContext.class,0);
@@ -3725,7 +3736,7 @@ public class RubyParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3>\u0220\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3?\u0220\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3907,10 +3918,10 @@ public class RubyParser extends Parser {
 		"\2\2\u01f9\u01ed\3\2\2\2\u01f9\u01f0\3\2\2\2\u01f9\u01f3\3\2\2\2\u01f9"+
 		"\u01f6\3\2\2\2\u01fa\u01fd\3\2\2\2\u01fb\u01f9\3\2\2\2\u01fb\u01fc\3\2"+
 		"\2\2\u01fc?\3\2\2\2\u01fd\u01fb\3\2\2\2\u01fe\u01ff\7\3\2\2\u01ffA\3\2"+
-		"\2\2\u0200\u0201\7;\2\2\u0201C\3\2\2\2\u0202\u0203\7:\2\2\u0203E\3\2\2"+
+		"\2\2\u0200\u0201\7<\2\2\u0201C\3\2\2\2\u0202\u0203\7;\2\2\u0203E\3\2\2"+
 		"\2\u0204\u0205\t\13\2\2\u0205G\3\2\2\2\u0206\u0207\7\66\2\2\u0207I\3\2"+
-		"\2\2\u0208\u0209\7<\2\2\u0209K\3\2\2\2\u020a\u020b\7=\2\2\u020bM\3\2\2"+
-		"\2\u020c\u020d\7>\2\2\u020dO\3\2\2\2\u020e\u020f\b)\1\2\u020f\u0212\7"+
+		"\2\2\u0208\u0209\7=\2\2\u0209K\3\2\2\2\u020a\u020b\7>\2\2\u020bM\3\2\2"+
+		"\2\u020c\u020d\7?\2\2\u020dO\3\2\2\2\u020e\u020f\b)\1\2\u020f\u0212\7"+
 		"\5\2\2\u0210\u0212\5R*\2\u0211\u020e\3\2\2\2\u0211\u0210\3\2\2\2\u0212"+
 		"\u0219\3\2\2\2\u0213\u0214\f\6\2\2\u0214\u0218\7\5\2\2\u0215\u0216\f\5"+
 		"\2\2\u0216\u0218\5R*\2\u0217\u0213\3\2\2\2\u0217\u0215\3\2\2\2\u0218\u021b"+

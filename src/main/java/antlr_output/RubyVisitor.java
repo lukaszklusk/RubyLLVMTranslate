@@ -258,4 +258,10 @@ public interface RubyVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCrlf(RubyParser.CrlfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link RubyParser#printer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrinter(RubyParser.PrinterContext ctx);
 }

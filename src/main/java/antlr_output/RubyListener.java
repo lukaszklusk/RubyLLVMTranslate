@@ -421,4 +421,14 @@ public interface RubyListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCrlf(RubyParser.CrlfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RubyParser#printer}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrinter(RubyParser.PrinterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RubyParser#printer}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrinter(RubyParser.PrinterContext ctx);
 }

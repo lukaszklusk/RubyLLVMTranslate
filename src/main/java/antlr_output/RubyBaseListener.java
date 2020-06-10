@@ -503,6 +503,18 @@ public class RubyBaseListener implements RubyListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCrlf(RubyParser.CrlfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrinter(RubyParser.PrinterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrinter(RubyParser.PrinterContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

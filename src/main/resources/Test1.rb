@@ -1,4 +1,6 @@
-var1 = 2
-var2 = 4
-var3 = var1 + var2
-puts var3
+var1 = 1
+var2 = "zxc"
+
+print "asd"
+print var2
+
