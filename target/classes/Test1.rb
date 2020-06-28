@@ -1,8 +1,11 @@
 var1 = 2
 
-for i in 0..5
-  var1 = var1 + 1
+def fun(v1,v2)
+  v1 = v1 + v2
 end
+
+var1 = fun(var1,3)
+
 
 
 

@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class MyRubyListener extends RubyBaseListener {
 
     public LLVM output = new LLVM();
+    public String tmp = "";
 
 
     @Override
@@ -115,6 +116,11 @@ public class MyRubyListener extends RubyBaseListener {
 
     public String resolveEquation(ParseTree a){
         String t = "";
+        if(!tmp.equals("")){
+            t = tmp;
+            tmp = "";
+            return t;
+        }
         if(a.getChildCount() > 1){
             if(!a.getChild(0).getText().equals("(")){
                 if(a.getChild(1).getText().equals("&&") || a.getChild(1).getText().equals("||")){
@@ -139,12 +145,11 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterAssignment(RubyParser.AssignmentContext ctx) {
-        output.store(ctx.lvalue().getText(),resolveEquation(ctx.rvalue()));
     }
 
     @Override
     public void exitAssignment(RubyParser.AssignmentContext ctx) {
-        super.exitAssignment(ctx);
+        output.store(ctx.lvalue().getText(),resolveEquation(ctx.rvalue()));
     }
 
     @Override
@@ -319,7 +324,7 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterFunctionCall(RubyParser.FunctionCallContext ctx) {
-        output.func_call(ctx.function_name.getText());
+        tmp = output.func_call(ctx.function_name.getText());
     }
 
     @Override
