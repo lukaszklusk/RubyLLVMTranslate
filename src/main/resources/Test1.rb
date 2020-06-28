@@ -5,7 +5,7 @@ def fun(v1,v2)
 end
 
 var1 = fun(var1,3)
-print "asd"
+
 
 
 

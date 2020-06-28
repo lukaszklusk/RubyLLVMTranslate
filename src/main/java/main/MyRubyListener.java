@@ -89,7 +89,13 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterFor_statement(RubyParser.For_statementContext ctx) {
-        super.enterFor_statement(ctx);
+        int j = 0;
+        System.out.println("---------");
+        System.out.println(ctx.getText() + " --ctx");
+        for(ParseTree i: ctx.children){
+            System.out.println(i.getText() + " -- " + j);
+            j++;
+        }
     }
 
     @Override
@@ -313,13 +319,6 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterFunctionCall(RubyParser.FunctionCallContext ctx) {
-        int j = 0;
-        System.out.println("---------");
-        System.out.println(ctx.getText() + " --ctx");
-        for(ParseTree i: ctx.children){
-            System.out.println(i.getText() + " -- " + j);
-            j++;
-        }
         output.func_call(ctx.function_name.getText());
     }
 

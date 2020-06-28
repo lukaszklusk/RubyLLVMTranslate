@@ -1,11 +1,8 @@
 var1 = 2
 
-def fun(v1,v2)
-  v1 = v1 + v2
+for i in 0..5
+  var1 = var1 + 1
 end
-
-var1 = fun(var1,3)
-print "asd"
 
 
 

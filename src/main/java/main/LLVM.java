@@ -447,7 +447,7 @@ public class LLVM {
     }
 
     void addStack() {
-        stackName = "%r" + nStack;
+        stackName = "%t" + nStack;
         nStack++;
     }
 
@@ -471,7 +471,7 @@ public class LLVM {
     void addLoop() {
         loopCondition = "loopCond" + loopStack;
         loopInstructions = "loopInstructs" + loopStack;
-        loopContinuation = "LoopContinu" + loopStack;
+        loopContinuation = "LoopContinue" + loopStack;
         loop_stack.add(loopStack);
         loopStack++;
     }
@@ -481,7 +481,7 @@ public class LLVM {
         if(loop_stack.size()>0){
             loopCondition = "loopCond" + loop_stack.get(loop_stack.size()-1);
             loopInstructions = "loopInstructs" + loop_stack.get(loop_stack.size()-1);;
-            loopContinuation = "LoopContinu" + loop_stack.get(loop_stack.size()-1);;
+            loopContinuation = "LoopContinue" + loop_stack.get(loop_stack.size()-1);;
         }
     }
 

@@ -132,6 +132,8 @@ while_expression_list : expression terminator
 
 for_statement : FOR LEFT_RBRACKET expression SEMICOLON expression SEMICOLON expression RIGHT_RBRACKET crlf for_expression_list END
               | FOR expression SEMICOLON expression SEMICOLON expression crlf for_expression_list END
+              | FOR expression IN rvalue DOTS rvalue crlf for_expression_list END
+              | FOR expression IN array_definition crlf for_expression_list END
               ;
 
 for_expression_list : expression terminator
@@ -304,6 +306,7 @@ WHILE : 'while';
 RETRY : 'retry';
 BREAK : 'break';
 FOR : 'for';
+IN : 'in';
 
 TRUE : 'true';
 FALSE : 'false';
@@ -345,6 +348,7 @@ LEFT_RBRACKET : '(';
 RIGHT_RBRACKET : ')';
 LEFT_SBRACKET : '[';
 RIGHT_SBRACKET : ']';
+DOTS : '..';
 
 NIL : 'nil';
 
