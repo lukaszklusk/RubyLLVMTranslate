@@ -1,9 +1,13 @@
 package main;
 
+import java.util.ArrayList;
+
 public class Function {
 	StringBuffer code;
 	Types returnType;
 	String name;
+	ArrayList<Variable> params = new ArrayList<>();
+	String retname;
 	
 	public String getName() {
 		return name;
@@ -28,8 +32,10 @@ public class Function {
 			return false;
 	}
 
+	public void putParam(Variable param){
+		params.add(param);
+	}
 
-	
 	public Function(String name) {
 		code = new StringBuffer();
 		returnType = Types.OBJECT;
@@ -49,9 +55,18 @@ public class Function {
 			code.append("ret void\n");
 		}
 		else
-			code.append("ret "+getllType()+" "+getDeflt()+"\n");
-		
-		code.insert(0, "define "+getllType()+" @"+name+"() {\n");
+			code.append("ret "+getllType()+" %"+getRetname()+"\n");
+
+		String head = "\ndefine "+getllType()+" @"+name+"(" ;
+		boolean f = false;
+		for (Variable p:params) {
+			if(f) head += ", ";
+			head += p.ll_typeName() + " %" + p.getName();
+			f = true;
+		}
+		head += ") {\n";
+
+		code.insert(0, head);
 		
 		code.append("}\n");
 		return new String(code);
@@ -68,5 +83,13 @@ public class Function {
 		default:
 			return "Bad_Type";
 		}
+	}
+
+	public void setRetname(String retname){
+		this.retname = retname;
+	}
+
+	private String getRetname(){
+		return retname;
 	}
 }

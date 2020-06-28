@@ -1,6 +1,11 @@
-var1 = 1
-var2 = "zxc"
+var1 = 2
 
+def fun(v1,v2)
+  v1 = v1 + v2
+end
+
+var1 = fun(var1,3)
 print "asd"
-print var2
+
+
 

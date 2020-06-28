@@ -55,9 +55,9 @@ public class LLVM {
         nStack = 0;
         brStack = 0;
         loopStack = 0;
-        putOutCode("declare void @printi(i32)");
-        putOutCode("declare void @printd(double)");
-        putOutCode("declare void @prints(i8*)");
+        putOutCode("declare i32 @printi(i32)");
+        putOutCode("declare i32 @printd(double)");
+        putOutCode("declare i32 @prints(i8*)");
 
         mainCode.append("\ndefine i32 @main() {\n");
     }
@@ -101,14 +101,19 @@ public class LLVM {
 
     public void func_param(String param) {
         if (actualFunc == null) {
-            error("Mangez des pommes.");
+            error("Nie ma definicji funkcji");
             return;
         }
-        store(param, "0");
+        Variable newVar = new Variable(Types.INT);
+        newVar.setName(param);
+        varMap.put(param,newVar);
+        actualFunc.putParam(newVar);
 
     }
 
-    public void end_function() {
+    public void end_function(Types rtype, String name) {
+        actualFunc.setType(rtype);
+        actualFunc.setRetname(name);
         Variable newFunc = new Variable(actualFunc.getType());
         globalVarMap.put(actualFunc.getName(), newFunc);
         headerCode.append(actualFunc.getFullCode());
@@ -131,8 +136,8 @@ public class LLVM {
     }
 
     public void func_call_param(String name) {
-        //if(funcCalling != null)
-        //	funcCalling.append(" "+ll_typeName(getType(name))+ " " + name + ",");
+        if(funcCalling != null)
+        	funcCalling.append(" "+ll_typeName(getType(name))+ " " + name + ",");
     }
 
     public void func_call_param_end() {
@@ -427,13 +432,13 @@ public class LLVM {
         Types type = getType(name);
         switch (type) {
             case INT:
-                putCode("call void @printi( i32 " + name + " )");
+                putCode("call i32 @printi( i32 " + name + " )");
                 break;
             case FLOAT:
-                putCode("call void @printd( double " + name + " )");
+                putCode("call i32 @printd( double " + name + " )");
                 break;
             case STRING:
-                putCode("call void @prints( i8* " + name + " )");
+                putCode("call i32 @prints( i8* " + name + " )");
                 break;
             default:
                 error("Niewypisywalna zmienna");
@@ -442,7 +447,7 @@ public class LLVM {
     }
 
     void addStack() {
-        stackName = "%t" + nStack;
+        stackName = "%r" + nStack;
         nStack++;
     }
 

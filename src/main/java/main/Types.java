@@ -1,5 +1,5 @@
 package main;
 
 public enum Types {
-	INT, FLOAT, BOOLEAN, STRING, OBJECT, VOID
+	INT, FLOAT, BOOLEAN, STRING, OBJECT, VOID, NONE
 }

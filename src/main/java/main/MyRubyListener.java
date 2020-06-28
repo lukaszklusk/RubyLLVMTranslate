@@ -143,7 +143,17 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterArray_assignment(RubyParser.Array_assignmentContext ctx) {
-        super.enterArray_assignment(ctx);
+        int j = 0;
+        System.out.println("---------");
+        System.out.println(ctx.getText() + " --ctx");
+        for(ParseTree i: ctx.children){
+            System.out.println(i.getText() + " -- " + j);
+            j++;
+        }
+        for(int ii=0;ii<ctx.getChild(2).getChildCount();ii++){
+            System.out.println(ctx.getChild(2).getChild(ii).getText() + " -- " + ii);
+            System.out.println(ctx.getChild(2).getChild(ii).getClass().toString() + " -- " + ii);
+        }
     }
 
     @Override
@@ -163,7 +173,13 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterArray_definition_elements(RubyParser.Array_definition_elementsContext ctx) {
-        super.enterArray_definition_elements(ctx);
+        int j = 0;
+        System.out.println("---------");
+        System.out.println(ctx.getText() + " --ctx");
+        for(ParseTree i: ctx.children){
+            System.out.println(i.getText() + " -- " + j);
+            j++;
+        }
     }
 
     @Override
@@ -191,18 +207,7 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterPrinter(RubyParser.PrinterContext ctx) {
-        int j = 0;
-        //System.out.println("---------");
-        //System.out.println(ctx.getText() + " --ctx");
-        for(ParseTree i: ctx.children){
-            System.out.println(i.getText() + " -- " + j);
-            if(j > 0){
-                System.out.println(i.getChild(0).getClass().toString() + " ###" );
-            }
-            j++;
-        }
         String t = resolveEqOrStr(ctx.getChild(1));
-        System.out.println(t);
         output.print(t);
     }
 
@@ -213,13 +218,7 @@ public class MyRubyListener extends RubyBaseListener {
 
     @Override
     public void enterEveryRule(ParserRuleContext ctx) {
-        int j = 0;
-        //System.out.println("---------");
-        //System.out.println(ctx.getText() + " --ctx");
-        for(ParseTree i: ctx.children){
-            //System.out.println(i.getText() + " --" + j);
-            j++;
-        }
+
     }
 
     @Override
@@ -238,5 +237,103 @@ public class MyRubyListener extends RubyBaseListener {
     @Override
     public void visitErrorNode(ErrorNode node) {
         super.visitErrorNode(node);
+    }
+
+    @Override
+    public void enterFunction_definition(RubyParser.Function_definitionContext ctx) {
+        output.begin_function(ctx.getChild(0).getChild(1).getText());
+    }
+
+    @Override
+    public void exitFunction_definition(RubyParser.Function_definitionContext ctx) {
+        if(output.actualFunc != null){
+            ParseTree tmp = checkRetVal(ctx.getChild(1));
+            if (tmp != null) {
+                output.end_function(output.getType("%" + tmp.getText()),tmp.getText());
+            }else{
+                output.end_function(Types.VOID,"");
+            }
+        }
+    }
+
+
+    public ParseTree checkRetVal(ParseTree cur){
+        while(!cur.getClass().toString().equals("class antlr_output.RubyParser$AssignmentContext")){
+            if(cur.getChildCount() < 1){
+                return null;
+            }
+            cur = cur.getChild(0);
+        }
+        return cur.getChild(0);
+    }
+
+    @Override
+    public void exitFunction_definition_body(RubyParser.Function_definition_bodyContext ctx) {
+        int j = 0;
+
+        ParseTree cur = ctx.getChild(0);
+        ParseTree tmp = null;
+        while(cur.getChildCount() > 1){
+            tmp = checkRetVal(cur.getChild(1));
+            if(tmp != null){
+                break;
+            }
+            cur = cur.getChild(0);
+        }
+        if (tmp != null) {
+            output.end_function(output.getType("%" + tmp.getText()),tmp.getText());
+        }
+    }
+
+    @Override
+    public void enterFunction_definition_params(RubyParser.Function_definition_paramsContext ctx) {
+        ParseTree cur = ctx.getChild(1);
+        while(cur.getClass().toString().equals("class antlr_output.RubyParser$Function_definition_params_listContext")){
+            if(cur.getChildCount()>1) {
+                output.func_param(cur.getChild(2).getText());
+                cur = cur.getChild(0);
+            }
+            else{
+                output.func_param(cur.getText());
+                break;
+            }
+        }
+
+    }
+
+    @Override
+    public void enterReturn_statement(RubyParser.Return_statementContext ctx) {
+        super.enterReturn_statement(ctx);
+    }
+
+    @Override
+    public void exitReturn_statement(RubyParser.Return_statementContext ctx) {
+        super.exitReturn_statement(ctx);
+    }
+
+    @Override
+    public void enterFunctionCall(RubyParser.FunctionCallContext ctx) {
+        int j = 0;
+        System.out.println("---------");
+        System.out.println(ctx.getText() + " --ctx");
+        for(ParseTree i: ctx.children){
+            System.out.println(i.getText() + " -- " + j);
+            j++;
+        }
+        output.func_call(ctx.function_name.getText());
+    }
+
+    @Override
+    public void exitFunctionCall(RubyParser.FunctionCallContext ctx) {
+        output.func_call_param_end();
+    }
+
+    @Override
+    public void enterFunction_call_params(RubyParser.Function_call_paramsContext ctx) {
+        if(ctx.getChildCount() > 1){
+            output.func_call_param(ctx.getChild(2).getText());
+        }else{
+            output.func_call_param(ctx.getChild(0).getText());
+        }
     }
 }
