@@ -1,1 +1,2 @@
-# A simple translator from Ruby to LLVM IR
+# RubyLLVMTranslate
+A simple translator form Ruby to LLVM IR using ANTLRv4 and Java.
